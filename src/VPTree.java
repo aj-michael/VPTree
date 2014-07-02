@@ -5,10 +5,10 @@ public class VPTree<T> {
     VPNode<T> root;
     Comparable cutoff;
 
-    public VPTree(Class<? extends VPNode> Node, Comparable cutoff, T[] in) {
+    public VPTree(Class<? extends VPNode> Node, Comparable cutoff, T[][] in) {
         this.root = null;
         this.cutoff = cutoff;
-        for (T val : in) {
+        for (T[] val : in) {
             try {
                 VPNode vpn = Node.newInstance();
                 vpn.value = val;

@@ -1,8 +1,10 @@
+import java.util.Arrays;
+
 /**
  * Created by michaea1 on 7/1/14.
  */
 abstract class VPNode<T> {
-    T value;
+    T[] value;
     VPNode<T> close;
     VPNode<T> far;
 
@@ -10,19 +12,17 @@ abstract class VPNode<T> {
     abstract Comparable distanceTo(VPNode<T> other);
 
     void printSubTree(int indent) {
-        while (true) {
-            for (int i = 0; i < indent; i++) System.out.print("\t");
-            System.out.println("Node: " + value.toString());
-            for (int i = 0; i < indent; i++) System.out.print("\t");
-            System.out.println("Close: ");
-            if (this.close != null) {
-                this.close.printSubTree(indent + 5);
-            }
-            for (int i = 0; i < indent; i++) System.out.print("\t");
-            System.out.println("Far: ");
-            if (this.far != null) {
-                this.far.printSubTree(indent + 5);
-            }
+        for (int i = 0; i < indent; i++) System.out.print("\t");
+        System.out.println("Node: " + Arrays.toString(this.value));
+        for (int i = 0; i < indent; i++) System.out.print("\t");
+        System.out.println("Close: ");
+        if (this.close != null) {
+            this.close.printSubTree(indent + 1);
+        }
+        for (int i = 0; i < indent; i++) System.out.print("\t");
+        System.out.println("Far: ");
+        if (this.far != null) {
+            this.far.printSubTree(indent + 1);
         }
     }
 }

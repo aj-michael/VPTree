@@ -1,10 +1,16 @@
 public class Main {
-
     public static void main(String[] args) {
-        int[][] points = {{1, 2, 3}, {-2, 11, 3}, {4, -1, 0}, {0, 0, 0},
-                {1, 15, -20}, {-50, 43, 3}, {15, 8, 9}, {32, 60, -15},
-                {5, 2, 9}, {3, -4, 9}, {-2, 0, 8}, {20, -15, 10}};
-        VPTree tree = new VPTree(EuclideanVPNode.class, 10, points);
+        int NUM_POINTS = 50;
+        int DIMENSIONS = 5;
+        int MAX_COORDINATE = 100;
+        double VP_CUTOFF = 75;
+        Double[][] points = new Double[NUM_POINTS][DIMENSIONS];
+        for (int point = 0; point < NUM_POINTS; point++) {
+            for (int coord = 0; coord < DIMENSIONS; coord++) {
+                points[point][coord] = new Double(2*MAX_COORDINATE*(.5-Math.random()));
+            }
+        }
+        VPTree tree = new VPTree(EuclideanVPNode.class, VP_CUTOFF, points);
         tree.printTree();
     }
 }

@@ -11,6 +11,10 @@ abstract class VPNode<T> {
     // must obey triangle inequality
     abstract Comparable distanceTo(VPNode<T> other);
 
+    boolean equals(VPNode other) {
+        return Arrays.equals(this.value, other.value);
+    }
+
     void printSubTree(int indent) {
         for (int i = 0; i < indent; i++) System.out.print("\t");
         System.out.println("Node: " + Arrays.toString(this.value));

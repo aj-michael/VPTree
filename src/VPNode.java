@@ -9,7 +9,7 @@ abstract class VPNode<T> {
     VPNode<T> far;
 
     // must obey triangle inequality
-    abstract Comparable distanceTo(VPNode<T> other);
+    abstract Double distanceTo(VPNode<T> other);
 
     boolean equals(VPNode other) {
         return Arrays.equals(this.value, other.value);

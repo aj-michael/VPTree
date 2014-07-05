@@ -5,9 +5,9 @@ import java.util.List;
  */
 public class VPTree<T> {
     VPNode<T> root;
-    Comparable<Double> cutoff;
+    double cutoff;
 
-    public VPTree(Class<? extends VPNode> Node, Comparable<Double> cutoff, T[][] in) {
+    public VPTree(Class<? extends VPNode> Node, double cutoff, T[][] in) {
         this.root = null;
         this.cutoff = cutoff;
         for (T[] val : in) {
@@ -36,8 +36,19 @@ public class VPTree<T> {
         }
     }
 
-    // otherNode need not be in the tree
-    public VPNode closestNodeTo(VPNode otherNode) {
+    // otherNode need not be in the tree (typically won't be)
+    public VPNode closestNodeTo(VPNode targetNode) {
+       return closestNodeTo(this.root, targetNode, this.cutoff);
+    }
+
+    public VPNode closestNodeTo(VPNode startingNode, VPNode targetNode, double tau) {
+        double distFromStart = startingNode.distanceTo(targetNode);
+        if (distFromStart < tau) {   // Don't need to search outer subtree
+            VPNode innerNode = closestNodeTo(startingNode.close, targetNode, Math.min(cutoff - distFromStart, tau));
+            return innerNode == null ? startingNode : innerNode;
+        } else {
+            
+        }
         return null;
     }
 
@@ -51,7 +62,7 @@ public class VPTree<T> {
 
     public boolean subtreeContains(VPNode subroot, VPNode otherNode) {
         Comparable distance = this.root.distanceTo(otherNode);
-        if (distance.compareTo(0) == 0) {
+        if (distance.compareTo((double) 0) == 0) {
             return true;
         } else if (distance.compareTo(this.cutoff) < 0) {
             return subroot.close == null ? false : this.subtreeContains(subroot.close, otherNode);
